@@ -1,0 +1,69 @@
+# ─────────────────────────────────────────
+# Bloomvera Autism — Frontend .gitignore
+# ─────────────────────────────────────────
+
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Environment variables (NEVER commit these)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Production build
+/build
+/dist
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# Testing
+/coverage
+
+# Misc
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.cache/
+.parcel-cache/
+.turbo/
+
+# Vercel / Netlify
+.vercel
+.netlify
+
+# Package lock (keep one, ignore the other)
+# yarn.lock   ← uncomment if using npm
+# package-lock.json  ← uncomment if using yarn
