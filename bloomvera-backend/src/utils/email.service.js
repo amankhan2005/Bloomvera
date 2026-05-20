@@ -233,7 +233,7 @@ async function sendUserConfirmationEmail({ name, email }) {
             <!-- Phone -->
             <div style="border-top:1px solid #F3F4F6;padding-top:20px;text-align:center;">
               <p style="margin:0 0 4px;font-size:12px;color:#9CA3AF;">Prefer to talk now? Call us:</p>
-              <a href="tel:+1234567890" style="font-size:18px;font-weight:700;color:#FF7A00;text-decoration:none;">(123) 456-7890</a>
+              <a href="tel:+17744642639" style="font-size:18px;font-weight:700;color:#FF7A00;text-decoration:none;">+1 774-464-2639</a>
             </div>
           </td>
         </tr>
@@ -243,8 +243,8 @@ async function sendUserConfirmationEmail({ name, email }) {
           <td style="background:#F9FAFB;padding:20px 32px;border-top:1px solid #E5E7EB;">
             <p style="margin:0;font-size:11px;color:#9CA3AF;text-align:center;line-height:1.7;">
               <strong style="color:#374151;">Bloomvera Autism</strong><br/>
-              info@bloomveraautism.com &nbsp;·&nbsp; (123) 456-7890<br/>
-              XXX Your Address, City, State, ZIP<br/><br/>
+              support@bloomveraautism.com &nbsp;·&nbsp; +1 774-464-2639<br/>
+              2823 Marietta St, Steilacoom, WA 98388<br/><br/>
               © ${new Date().getFullYear()} Bloomvera Autism. All rights reserved.
             </p>
           </td>

@@ -21,8 +21,11 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (mobile apps, curl, Postman)
-      if (!origin) return callback(null, true);
+      // Allow requests with no origin (mobile apps, curl, Postman) in dev only
+      if (!origin) {
+        if (process.env.NODE_ENV !== "production") return callback(null, true);
+        return callback(new Error("CORS: Missing origin in production"));
+      }
       if (allowedOrigins.includes(origin)) return callback(null, true);
       callback(new Error(`CORS: Origin ${origin} not allowed`));
     },
@@ -46,6 +49,7 @@ app.get("/health", (req, res) => {
   res.status(200).json({
     status: "ok",
     service: "Bloomvera Autism API",
+    environment: process.env.NODE_ENV,
     timestamp: new Date().toISOString(),
   });
 });

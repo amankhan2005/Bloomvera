@@ -36,7 +36,7 @@ async function submitInquiry(req, res) {
     if (adminResult.status === "rejected") {
       return res.status(500).json({
         success: false,
-        message: "Failed to send your message. Please try again or call us directly at (123) 456-7890.",
+        message: "Failed to send your message. Please try again or call us directly at +1 774-464-2639.",
       });
     }
 

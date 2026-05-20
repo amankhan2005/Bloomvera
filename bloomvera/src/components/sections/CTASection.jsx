@@ -11,7 +11,7 @@ export default function CTASection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22,1,0.36,1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="relative rounded-3xl overflow-hidden text-center p-10 sm:p-16"
           style={{ background: "#0A0A0A" }}
         >
@@ -42,9 +42,12 @@ export default function CTASection() {
                 style={{ background: "linear-gradient(135deg,#FF7A00,#E91E63)", boxShadow: "0 6px 28px rgba(255,122,0,0.38)" }}>
                 Book Free Consultation <ArrowRight size={15} strokeWidth={2.5} />
               </Link>
-              <a href="tel:+1234567890"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/8 text-white font-sans font-semibold text-sm rounded-2xl border border-white/12 hover:bg-white/14 hover:-translate-y-0.5 transition-all backdrop-blur-sm">
-                <Phone size={15} /> Call (123) 456-7890
+              <a
+                href="tel:+17744642639"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/8 text-white font-sans font-semibold text-sm rounded-2xl border border-white/12 hover:bg-white/14 hover:-translate-y-0.5 transition-all backdrop-blur-sm"
+              >
+                <Phone size={15} />
+                Call +1 774-464-2639
               </a>
             </div>
           </div>

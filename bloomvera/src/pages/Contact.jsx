@@ -9,9 +9,9 @@ import { StaggerContainer, StaggerItem } from "../components/ui/AnimatedWrapper"
 const API_URL = process.env.REACT_APP_API_URL;
 
 const contactInfo = [
-  { icon: Phone,  label: "Phone",   value: "(123) 456-7890",           href: "tel:+1234567890",               color: "#FF7A00" },
-  { icon: Mail,   label: "Email",   value: "info@bloomveraautism.com",  href: "mailto:info@bloomveraautism.com", color: "#00A651" },
-  { icon: MapPin, label: "Address", value: "XXX, Your Street\nCity, State, ZIP", href: "#",                   color: "#E91E63" },
+  { icon: Phone,  label: "Phone",   value: "+1 774-464-2639",                        href: "tel:+17744642639",                                                  color: "#FF7A00", newTab: false },
+  { icon: Mail,   label: "Email",   value: "support@bloomveraautism.com",             href: "mailto:support@bloomveraautism.com",                                 color: "#00A651", newTab: false },
+  { icon: MapPin, label: "Address", value: "2823 Marietta St\nSteilacoom, WA 98388",  href: "https://maps.google.com/?q=2823+Marietta+St,+Steilacoom,+WA+98388", color: "#E91E63", newTab: true  },
 ];
 
 const hours = [
@@ -112,7 +112,10 @@ export default function Contact() {
                   const Icon = info.icon;
                   return (
                     <StaggerItem key={info.label}>
-                      <a href={info.href}
+                      <a
+                        href={info.href}
+                        target={info.newTab ? "_blank" : undefined}
+                        rel={info.newTab ? "noopener noreferrer" : undefined}
                         className="flex items-start gap-4 p-4 rounded-2xl border border-gray-100 hover:shadow-card transition-all duration-200 group"
                         style={{ background: `${info.color}06` }}
                       >
@@ -202,7 +205,7 @@ export default function Contact() {
                           </label>
                           <input
                             type="email" name="email" value={form.email}
-                            onChange={onChange} placeholder="your@email.com"
+                            onChange={onChange} placeholder="support@bloomveraautism.com"
                             className={inputCls("email")}
                           />
                           {errors.email && <p className="mt-1 text-xs text-pink-500">{errors.email}</p>}
@@ -213,7 +216,7 @@ export default function Contact() {
                           </label>
                           <input
                             type="tel" name="phone" value={form.phone}
-                            onChange={onChange} placeholder="(123) 456-7890"
+                            onChange={onChange} placeholder="+1 774-464-2639"
                             className={inputCls("phone")}
                           />
                           {errors.phone && <p className="mt-1 text-xs text-pink-500">{errors.phone}</p>}
