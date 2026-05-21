@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Award, ClipboardList, Baby, Heart, Users, BookOpen } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
+import { useTheme } from "../../context/ThemeContext";
 
 const items = [
   { icon: Award,         title: "Certified Specialists",  desc: "Board-certified BCBAs and RBTs with years of hands-on clinical expertise.", color: "#FF7A00" },
@@ -13,8 +14,9 @@ const items = [
 ];
 
 export default function WhyChooseUs() {
+  const { dark } = useTheme();
   return (
-    <section className="section-py" style={{ background: "#F9FAFB" }}>
+    <section className="section-py" style={{ background: dark ? "#1A2332" : "#F9FAFB" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <SectionHeading
           tag="Why Choose Us"

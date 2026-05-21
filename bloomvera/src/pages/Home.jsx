@@ -7,6 +7,7 @@ import ImageSlideshow from "../components/sections/ImageSlideshow";
 import CTASection from "../components/sections/CTASection";
 import FAQAccordion from "../components/ui/FAQAccordion";
 import SectionHeading from "../components/ui/SectionHeading";
+import { useTheme } from "../context/ThemeContext";
 
 const faqs = [
   { q:"What is ABA Therapy and is it right for my child?", a:"Applied Behavior Analysis (ABA) is one of the most researched, effective therapies for autism. It builds communication, social, and daily living skills through structured positive reinforcement. We assess every child individually before recommending a program." },
@@ -16,6 +17,7 @@ const faqs = [
 ];
 
 export default function Home() {
+  const { dark } = useTheme();
   return (
     <>
       <HeroSection />
@@ -25,7 +27,7 @@ export default function Home() {
       <ImageSlideshow />
 
       {/* FAQ teaser */}
-      <section className="section-py" style={{ background:"#F9FAFB" }}>
+      <section className="section-py" style={{ background: dark ? "#1A2332" : "#F9FAFB" }}>
         <div className="max-w-3xl mx-auto px-5 sm:px-8">
           <SectionHeading
             tag="Common Questions"

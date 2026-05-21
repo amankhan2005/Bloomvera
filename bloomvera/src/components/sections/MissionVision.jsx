@@ -2,10 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Target, Eye, CheckCircle } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function MissionVision() {
+  const { dark } = useTheme();
   return (
-    <section className="section-py bg-white">
+    <section className="section-py" style={{ background: dark ? "#111827" : "#ffffff" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <SectionHeading tag="Who We Are" title="Mission &" highlight="Vision" />
         <div className="grid lg:grid-cols-2 gap-6">

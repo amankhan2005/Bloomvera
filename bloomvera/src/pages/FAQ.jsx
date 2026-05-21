@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import PageHero from "../components/ui/PageHero";
 import FAQAccordion from "../components/ui/FAQAccordion";
 import CTASection from "../components/sections/CTASection";
+import { useTheme } from "../context/ThemeContext";
 
 const categories = [
   { label: "General", emoji: "✦", faqs: [
@@ -32,6 +33,7 @@ const ALL = "All";
 const tabList = [ALL, ...categories.map(c => c.label)];
 
 export default function FAQ() {
+  const { dark } = useTheme();
   const [search, setSearch] = useState("");
   const [cat, setCat] = useState(ALL);
   const scrollRef = useRef(null);
@@ -93,9 +95,7 @@ export default function FAQ() {
         .no-results-card {
           text-align: center;
           padding: 3rem 2rem;
-          background: white;
           border-radius: 20px;
-          border: 1px solid #F3F4F6;
         }
       `}</style>
 
@@ -107,7 +107,7 @@ export default function FAQ() {
         image="/faq.png"
       />
 
-      <section style={{ background: "linear-gradient(180deg,#F9FAFB 0%,#fff 100%)", paddingTop: "3rem", paddingBottom: "5rem" }}>
+      <section style={{ background: dark ? "#111827" : "linear-gradient(180deg,#F9FAFB 0%,#fff 100%)", paddingTop: "3rem", paddingBottom: "5rem" }}>
         <div className="max-w-3xl mx-auto px-5 sm:px-8">
 
           {/* ── SEARCH ── */}
@@ -117,7 +117,7 @@ export default function FAQ() {
             transition={{ duration: 0.5 }}
             className="search-wrap mb-6">
             <div className="search-inner">
-              <div className="relative bg-white border border-gray-200 rounded-2xl transition-all"
+              <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, borderRadius: 16 }} className="relative transition-all"
                 style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
                 <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" strokeWidth={2.5} />
                 <input
@@ -125,12 +125,12 @@ export default function FAQ() {
                   placeholder="Search questions…"
                   value={search}
                   onChange={e => { setSearch(e.target.value); setCat(ALL); }}
-                  className="w-full pl-10 pr-12 py-4 bg-transparent font-sans text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none rounded-2xl"
+                  style={{ color: dark ? "#E2E8F0" : "#1F2937" }} className="w-full pl-10 pr-12 py-4 bg-transparent font-sans text-sm focus:outline-none rounded-2xl"
                 />
                 {search && (
                   <button
                     onClick={() => setSearch("")}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-300 transition-colors text-xs font-bold">
+                    style={{ background: dark ? "#334155" : "#E5E7EB", color: dark ? "#94A3B8" : "#6B7280" }} className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center transition-colors text-xs font-bold">
                     ×
                   </button>
                 )}
@@ -152,7 +152,7 @@ export default function FAQ() {
                 <div className="flex sm:hidden items-center gap-1.5 mb-1">
                   <button
                     onClick={() => scrollTabs(-1)}
-                    className="shrink-0 w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 active:scale-95 transition-transform"
+                    style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
                     style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.07)" }}
                     aria-label="Scroll left">
                     <ChevronLeft size={14} strokeWidth={2.5} />
@@ -171,7 +171,7 @@ export default function FAQ() {
                           className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full font-sans font-semibold text-xs transition-all duration-250"
                           style={isA
                             ? { background: "linear-gradient(135deg,#FF7A00,#E91E63)", color: "#fff", boxShadow: "0 4px 14px rgba(255,122,0,0.35)" }
-                            : { background: "#F3F4F6", color: "#9CA3AF" }
+                            : { background: dark ? "#1E293B" : "#F3F4F6", color: dark ? "#64748B" : "#9CA3AF", border: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "transparent"}` }
                           }>
                           {catObj && <span style={{ fontSize: 10 }}>{catObj.emoji}</span>}
                           {label}
@@ -182,7 +182,7 @@ export default function FAQ() {
 
                   <button
                     onClick={() => scrollTabs(1)}
-                    className="shrink-0 w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 active:scale-95 transition-transform"
+                    style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
                     style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.07)" }}
                     aria-label="Scroll right">
                     <ChevronRight size={14} strokeWidth={2.5} />
@@ -202,7 +202,7 @@ export default function FAQ() {
                         className="flex items-center gap-1.5 px-5 py-2.5 rounded-full font-sans font-semibold text-sm transition-all duration-200"
                         style={isA
                           ? { background: "linear-gradient(135deg,#FF7A00,#E91E63)", color: "#fff", boxShadow: "0 4px 16px rgba(255,122,0,0.3)" }
-                          : { background: "#fff", color: "#6B7280", border: "1px solid #E5E7EB" }
+                          : { background: dark ? "#1E293B" : "#fff", color: dark ? "#94A3B8" : "#6B7280", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}` }
                         }>
                         {catObj && <span style={{ fontSize: 12 }}>{catObj.emoji}</span>}
                         {label}
@@ -216,7 +216,7 @@ export default function FAQ() {
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="text-center text-xs text-gray-400 font-sans mt-3">
+                    style={{ color: dark ? "#64748B" : "#9CA3AF" }} className="text-center text-xs font-sans mt-3">
                     {totalFaqs} question{totalFaqs !== 1 ? "s" : ""} in this category
                   </motion.p>
                 )}
@@ -242,8 +242,8 @@ export default function FAQ() {
                     <div className="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center mx-auto mb-4">
                       <Search size={22} className="text-orange-400" strokeWidth={2} />
                     </div>
-                    <p className="font-sans font-semibold text-gray-800 text-base mb-1">No results found</p>
-                    <p className="text-gray-400 text-sm mb-5">Nothing matched "<span className="text-orange-500">{search}</span>". Try different keywords.</p>
+                    <p style={{ color: dark ? "#E2E8F0" : "#1F2937" }} className="font-sans font-semibold text-base mb-1">No results found</p>
+                    <p style={{ color: dark ? "#64748B" : "#9CA3AF" }} className="text-sm mb-5">Nothing matched "<span className="text-orange-500">{search}</span>". Try different keywords.</p>
                     <Link to="/contact-us"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-sans font-semibold text-sm"
                       style={{ background: "linear-gradient(135deg,#FF7A00,#E91E63)", boxShadow: "0 4px 16px rgba(255,122,0,0.3)" }}>
@@ -266,10 +266,10 @@ export default function FAQ() {
                     transition={{ delay: ci * 0.07 }}>
                     <div className="category-section-label">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-200" />
-                      <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-gray-100"
+                      <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#F3F4F6"}` }} className="flex items-center gap-2 px-3 py-1 rounded-full"
                         style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
                         <span style={{ fontSize: 11, color: "#FF7A00" }}>{c.emoji}</span>
-                        <span className="font-sans font-bold text-gray-500 text-xs uppercase tracking-widest">{c.label}</span>
+                        <span style={{ color: dark ? "#64748B" : "#9CA3AF" }} className="font-sans font-bold text-xs uppercase tracking-widest">{c.label}</span>
                       </div>
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-200" />
                     </div>

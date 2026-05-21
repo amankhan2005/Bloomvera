@@ -2,10 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone } from "lucide-react";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function CTASection() {
+  const { dark } = useTheme();
   return (
-    <section className="section-py" style={{ background: "#F9FAFB" }}>
+    <section className="section-py" style={{ background: dark ? "#111827" : "#F9FAFB" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -15,7 +17,6 @@ export default function CTASection() {
           className="relative rounded-3xl overflow-hidden text-center p-10 sm:p-16"
           style={{ background: "#0A0A0A" }}
         >
-          {/* Glows */}
           <div className="absolute top-0 left-1/3 w-72 h-72 rounded-full blur-3xl pointer-events-none opacity-20"
             style={{ background: "#FF7A00", transform: "translateY(-50%)" }} />
           <div className="absolute bottom-0 right-1/3 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-15"
@@ -42,10 +43,8 @@ export default function CTASection() {
                 style={{ background: "linear-gradient(135deg,#FF7A00,#E91E63)", boxShadow: "0 6px 28px rgba(255,122,0,0.38)" }}>
                 Book Free Consultation <ArrowRight size={15} strokeWidth={2.5} />
               </Link>
-              <a
-                href="tel:+17744642639"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-white/8 text-white font-sans font-semibold text-sm rounded-2xl border border-white/12 hover:bg-white/14 hover:-translate-y-0.5 transition-all backdrop-blur-sm"
-              >
+              <a href="tel:+17744642639"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white/8 text-white font-sans font-semibold text-sm rounded-2xl border border-white/12 hover:bg-white/14 hover:-translate-y-0.5 transition-all backdrop-blur-sm">
                 <Phone size={15} />
                 Call +1 774-464-2639
               </a>

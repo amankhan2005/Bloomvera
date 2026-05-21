@@ -4,6 +4,7 @@ import { Brain, Users, Sparkles, Home, CheckCircle2, ArrowRight, ChevronLeft, Ch
 import { Link } from "react-router-dom";
 import PageHero from "../components/ui/PageHero";
 import CTASection from "../components/sections/CTASection";
+import { useTheme } from "../context/ThemeContext";
 
 const services = [
   {
@@ -69,6 +70,7 @@ const services = [
 ];
 
 export default function Services() {
+  const { dark } = useTheme();
   const [active, setActive] = useState("aba");
   const scrollRef = useRef(null);
   const s = services.find(x => x.id === active);
@@ -133,7 +135,7 @@ export default function Services() {
       />
 
       {/* ── STICKY TAB BAR ── */}
-      <div className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-gray-100"
+      <div style={{ background: dark ? "rgba(17,24,39,0.95)" : "rgba(255,255,255,0.92)", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#F3F4F6"}` }} className="sticky top-0 z-30 backdrop-blur-xl"
         style={{ boxShadow: "0 2px 20px rgba(0,0,0,0.06)" }}>
         <div className="max-w-6xl mx-auto">
 
@@ -141,7 +143,7 @@ export default function Services() {
           <div className="flex sm:hidden items-center gap-1 px-3 py-3">
             <button
               onClick={() => scrollTabs(-1)}
-              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-500 active:scale-95 transition-transform"
+              style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
               aria-label="Scroll left">
               <ChevronLeft size={15} strokeWidth={2.5} />
             </button>
@@ -170,7 +172,7 @@ export default function Services() {
 
             <button
               onClick={() => scrollTabs(1)}
-              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-white text-gray-500 active:scale-95 transition-transform"
+              style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
               aria-label="Scroll right">
               <ChevronRight size={15} strokeWidth={2.5} />
             </button>
@@ -201,7 +203,7 @@ export default function Services() {
       </div>
 
       {/* ── MAIN CONTENT ── */}
-      <section className="bg-gray-50/60" style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
+      <section style={{ background: dark ? "#111827" : "#F9FAFB", paddingTop: "3rem", paddingBottom: "4rem" }}>
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
           <AnimatePresence mode="wait">
@@ -243,9 +245,9 @@ export default function Services() {
                       style={{ background: `linear-gradient(to top, ${s.color}40, transparent)` }} />
                   </div>
 
-                  <div className="bg-white rounded-2xl p-6 border border-gray-100/80"
+                  <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`, borderRadius: 16, padding: "24px" }}
                     style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.05)" }}>
-                    <p className="text-gray-600 text-sm leading-relaxed mb-5">{s.desc}</p>
+                    <p style={{ color: dark ? "#94A3B8" : "#4B5563" }} className="text-sm leading-relaxed mb-5">{s.desc}</p>
                     <Link to="/contact-us"
                       className="inline-flex items-center gap-2 px-6 py-3 text-white font-sans font-bold text-sm rounded-xl hover:-translate-y-0.5 transition-all active:scale-95"
                       style={{ background: s.gradient, boxShadow: `0 6px 20px ${s.color}35` }}>
@@ -256,11 +258,11 @@ export default function Services() {
                 </div>
 
                 {/* Right: benefits */}
-                <div className="bg-white rounded-2xl p-6 border border-gray-100/80"
+                <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`, borderRadius: 16, padding: "24px" }}
                   style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.05)" }}>
                   <div className="flex items-center gap-2 mb-5">
                     <div className="w-1 h-5 rounded-full" style={{ background: s.gradient }} />
-                    <h3 className="font-bold text-gray-900 text-base tracking-tight">Key Benefits</h3>
+                    <h3 style={{ color: dark ? "#F1F5F9" : "#111827" }} className="font-bold text-base tracking-tight">Key Benefits</h3>
                   </div>
                   <ul className="space-y-1">
                     {s.benefits.map((b, i) => (
@@ -274,7 +276,7 @@ export default function Services() {
                           style={{ background: `${s.color}15` }}>
                           <CheckCircle2 size={13} style={{ color: s.color }} strokeWidth={2.5} />
                         </div>
-                        <span className="text-gray-700 text-sm">{b}</span>
+                        <span style={{ color: dark ? "#CBD5E1" : "#374151" }} className="text-sm">{b}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -282,11 +284,11 @@ export default function Services() {
               </div>
 
               {/* ── PROCESS ── */}
-              <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100/80"
+              <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`, borderRadius: 16, padding: "24px 32px" }}
                 style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.05)" }}>
                 <div className="flex items-center gap-2 mb-6">
                   <div className="w-1 h-5 rounded-full" style={{ background: s.gradient }} />
-                  <h3 className="font-bold text-gray-900 text-base tracking-tight">Our Process</h3>
+                  <h3 style={{ color: dark ? "#F1F5F9" : "#111827" }} className="font-bold text-base tracking-tight">Our Process</h3>
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 process-grid">
                   {s.process.map((p, i) => (

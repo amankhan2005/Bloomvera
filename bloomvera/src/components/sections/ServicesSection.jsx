@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import SectionHeading from "../ui/SectionHeading";
+import { useTheme } from "../../context/ThemeContext";
 
 const services = [
   {
@@ -35,18 +36,26 @@ const services = [
   },
 ];
 
-function ServiceCard({ s, i }) {
+function ServiceCard({ s, i, dark }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22,1,0.36,1] }}
-      className="group relative bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-card hover:shadow-card-hover transition-all duration-400 flex flex-col"
-      style={{ transitionDuration: "400ms" }}
+      className="group relative rounded-3xl overflow-hidden flex flex-col"
+      style={{
+        background: dark ? "#1F2937" : "#ffffff",
+        border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+        boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+        transition: "box-shadow 0.3s, border-color 0.3s",
+      }}
+      onMouseEnter={e => e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.14)"}
+      onMouseLeave={e => e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.06)"}
     >
       {/* Image */}
-      <div className="relative overflow-hidden aspect-[16/10] bg-gray-100 shrink-0">
+      <div className="relative overflow-hidden aspect-[16/10] shrink-0"
+        style={{ background: dark ? "#111827" : "#F3F4F6" }}>
         <img src={s.image} alt={s.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           onError={e => {
@@ -56,12 +65,10 @@ function ServiceCard({ s, i }) {
                   <div class="w-14 h-14 rounded-2xl mx-auto mb-3 flex items-center justify-center" style="background:${s.accent}18">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${s.accent}" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
                   </div>
-                  <p class="font-sans font-semibold text-gray-600 text-sm">${s.title}</p>
-                  <p class="font-sans text-gray-400 text-xs mt-1">Add image to /public</p>
+                  <p style="font-weight:600;color:#9CA3AF;font-size:13px">${s.title}</p>
                 </div>
               </div>`;
           }} />
-        {/* Accent bar */}
         <div className="absolute bottom-0 left-0 right-0 h-1 group-hover:h-1.5 transition-all duration-300"
           style={{ background: s.accent }} />
       </div>
@@ -71,8 +78,14 @@ function ServiceCard({ s, i }) {
         <p className="font-sans text-[10px] font-bold tracking-[0.16em] uppercase mb-2" style={{ color: s.accent }}>
           {s.sub}
         </p>
-        <h3 className="font-sans font-bold text-dark text-lg leading-snug tracking-tight mb-3">{s.title}</h3>
-        <p className="text-muted text-sm leading-relaxed flex-1">{s.desc}</p>
+        <h3 className="font-sans font-bold text-lg leading-snug tracking-tight mb-3"
+          style={{ color: dark ? "#F9FAFB" : "#0A0A0A" }}>
+          {s.title}
+        </h3>
+        <p className="text-sm leading-relaxed flex-1"
+          style={{ color: dark ? "#9CA3AF" : "#6B7280" }}>
+          {s.desc}
+        </p>
         <Link to="/services"
           className="inline-flex items-center gap-1.5 mt-5 text-xs font-sans font-semibold transition-all group-hover:gap-2.5"
           style={{ color: s.accent }}>
@@ -84,8 +97,9 @@ function ServiceCard({ s, i }) {
 }
 
 export default function ServicesSection() {
+  const { dark } = useTheme();
   return (
-    <section className="section-py bg-white">
+    <section className="section-py" style={{ background: dark ? "#111827" : "#ffffff" }}>
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <SectionHeading
           tag="Our Programs"
@@ -94,7 +108,7 @@ export default function ServicesSection() {
           subtitle="Every program is carefully designed around your child's unique needs, delivered by certified specialists who genuinely care."
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((s, i) => <ServiceCard key={s.title} s={s} i={i} />)}
+          {services.map((s, i) => <ServiceCard key={s.title} s={s} i={i} dark={dark} />)}
         </div>
       </div>
     </section>

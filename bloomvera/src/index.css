@@ -24,13 +24,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* ── DARK MODE GLOBAL ── */
+body.dark {
+  color: #F3F4F6;
+  background: #111827;
+}
+
+body.dark .section-light { background: #1F2937 !important; }
+body.dark .section-gray { background: #1A2332 !important; }
 
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: #f8f8f8; }
+body.dark ::-webkit-scrollbar-track { background: #1F2937; }
 ::-webkit-scrollbar-thumb { background: #FF7A00; border-radius: 2px; }
 
 ::selection { background: rgba(255,122,0,0.12); color: #0A0A0A; }
+body.dark ::selection { color: #F3F4F6; }
 
 *:focus-visible { outline: 2px solid #FF7A00; outline-offset: 3px; border-radius: 4px; }
 
@@ -48,6 +60,11 @@ img { display: block; max-width: 100%; }
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.95);
+}
+
+body.dark .glass {
+  background: rgba(31,41,55,0.92);
+  border: 1px solid rgba(255,255,255,0.08);
 }
 
 .section-py { padding-top: 5.5rem; padding-bottom: 5.5rem; }
@@ -70,7 +87,7 @@ img { display: block; max-width: 100%; }
 }
 .slide-enter { animation: slideIn 0.7s ease forwards; }
 
-/* Ken Burns pan effect on images */
+/* Ken Burns */
 @keyframes kenburns {
   0%   { transform: scale(1) translate(0, 0); }
   100% { transform: scale(1.08) translate(-1%, -1%); }
@@ -97,3 +114,18 @@ img { display: block; max-width: 100%; }
 }
 .ticker-track { animation: ticker 28s linear infinite; }
 .ticker-track:hover { animation-play-state: paused; }
+
+/* ── CHATBOT ── */
+@keyframes chatPop {
+  from { opacity: 0; transform: scale(0.88) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.chat-popup { animation: chatPop 0.28s cubic-bezier(0.22,1,0.36,1) forwards; }
+
+@keyframes chatDot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+.chat-typing span:nth-child(1) { animation: chatDot 1.2s infinite 0s; }
+.chat-typing span:nth-child(2) { animation: chatDot 1.2s infinite 0.2s; }
+.chat-typing span:nth-child(3) { animation: chatDot 1.2s infinite 0.4s; }
