@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef } from "react";
-import { Search, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, MessageCircle, MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import PageHero from "../components/ui/PageHero";
@@ -16,7 +16,7 @@ const categories = [
   { label: "Therapy", emoji: "◈", faqs: [
     { q: "What is ABA Therapy and how does it work?", a: "ABA uses positive reinforcement to build skills and reduce challenging behaviors. Therapists work one-on-one with children using structured learning and natural play to teach communication, social, and adaptive skills tailored to each child's goals." },
     { q: "How many therapy hours does my child need?", a: "Hours vary based on individual needs. After a comprehensive assessment, our clinical team will recommend an appropriate intensity — typically ranging from 10 to 40 hours per week for ABA." },
-    { q: "Do you provide home-based therapy?", a: "Yes. Our Home-Based program brings certified therapists to your home, and we provide caregiver coaching to help generalize skills across all settings." },
+    { q: "Do you provide home-based therapy?", a: "Yes. We proudly offer Home-Based ABA therapy across Washington State — our certified therapists come directly to your home, and we provide caregiver coaching to help generalize skills across all settings." },
     { q: "Are your therapists certified?", a: "Yes. Our team includes Board Certified Behavior Analysts (BCBAs) and Registered Behavior Technicians (RBTs), all holding valid certifications with ongoing professional development." },
   ]},
   { label: "Family", emoji: "❋", faqs: [
@@ -110,6 +110,29 @@ export default function FAQ() {
       <section style={{ background: dark ? "#111827" : "linear-gradient(180deg,#F9FAFB 0%,#fff 100%)", paddingTop: "3rem", paddingBottom: "5rem" }}>
         <div className="max-w-3xl mx-auto px-5 sm:px-8">
 
+          {/* ── Washington Home-Based Banner ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex items-center gap-3 rounded-2xl px-5 py-3.5 mb-6"
+            style={{
+              background: dark ? "rgba(124,58,237,0.10)" : "rgba(124,58,237,0.07)",
+              border: `1px solid ${dark ? "rgba(124,58,237,0.25)" : "rgba(124,58,237,0.18)"}`,
+            }}>
+            <div
+              className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+              style={{ background: "rgba(124,58,237,0.15)" }}>
+              <MapPin size={16} style={{ color: "#7C3AED" }} strokeWidth={2} />
+            </div>
+            <p className="text-sm" style={{ color: dark ? "#CBD5E1" : "#374151" }}>
+              <span className="font-semibold" style={{ color: dark ? "#F1F5F9" : "#111827" }}>
+                Now serving families across Washington State —&nbsp;
+              </span>
+              we offer home-based ABA therapy delivered by certified therapists, right at your door.
+            </p>
+          </motion.div>
+
           {/* ── SEARCH ── */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -117,20 +140,28 @@ export default function FAQ() {
             transition={{ duration: 0.5 }}
             className="search-wrap mb-6">
             <div className="search-inner">
-              <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, borderRadius: 16 }} className="relative transition-all"
-                style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
+              <div
+                className="relative transition-all"
+                style={{
+                  background: dark ? "#1E293B" : "#fff",
+                  border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`,
+                  borderRadius: 16,
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+                }}>
                 <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" strokeWidth={2.5} />
                 <input
                   type="text"
                   placeholder="Search questions…"
                   value={search}
                   onChange={e => { setSearch(e.target.value); setCat(ALL); }}
-                  style={{ color: dark ? "#E2E8F0" : "#1F2937" }} className="w-full pl-10 pr-12 py-4 bg-transparent font-sans text-sm focus:outline-none rounded-2xl"
+                  style={{ color: dark ? "#E2E8F0" : "#1F2937" }}
+                  className="w-full pl-10 pr-12 py-4 bg-transparent font-sans text-sm focus:outline-none rounded-2xl"
                 />
                 {search && (
                   <button
                     onClick={() => setSearch("")}
-                    style={{ background: dark ? "#334155" : "#E5E7EB", color: dark ? "#94A3B8" : "#6B7280" }} className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center transition-colors text-xs font-bold">
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full flex items-center justify-center transition-colors text-xs font-bold"
+                    style={{ background: dark ? "#334155" : "#E5E7EB", color: dark ? "#94A3B8" : "#6B7280" }}>
                     ×
                   </button>
                 )}
@@ -148,12 +179,17 @@ export default function FAQ() {
                 transition={{ duration: 0.3 }}
                 className="mb-10">
 
-                {/* Mobile: scroll strip with arrows */}
+                {/* Mobile */}
                 <div className="flex sm:hidden items-center gap-1.5 mb-1">
                   <button
                     onClick={() => scrollTabs(-1)}
-                    style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
-                    style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.07)" }}
+                    className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
+                    style={{
+                      background: dark ? "#1E293B" : "#fff",
+                      border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`,
+                      color: dark ? "#94A3B8" : "#6B7280",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+                    }}
                     aria-label="Scroll left">
                     <ChevronLeft size={14} strokeWidth={2.5} />
                   </button>
@@ -182,14 +218,19 @@ export default function FAQ() {
 
                   <button
                     onClick={() => scrollTabs(1)}
-                    style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
-                    style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.07)" }}
+                    className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
+                    style={{
+                      background: dark ? "#1E293B" : "#fff",
+                      border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`,
+                      color: dark ? "#94A3B8" : "#6B7280",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+                    }}
                     aria-label="Scroll right">
                     <ChevronRight size={14} strokeWidth={2.5} />
                   </button>
                 </div>
 
-                {/* Desktop: centered wrap */}
+                {/* Desktop */}
                 <div className="hidden sm:flex flex-wrap gap-2 justify-center">
                   {tabList.map(label => {
                     const isA = cat === label;
@@ -211,12 +252,12 @@ export default function FAQ() {
                   })}
                 </div>
 
-                {/* Count badge */}
                 {cat !== ALL && (
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    style={{ color: dark ? "#64748B" : "#9CA3AF" }} className="text-center text-xs font-sans mt-3">
+                    className="text-center text-xs font-sans mt-3"
+                    style={{ color: dark ? "#64748B" : "#9CA3AF" }}>
                     {totalFaqs} question{totalFaqs !== 1 ? "s" : ""} in this category
                   </motion.p>
                 )}
@@ -242,8 +283,10 @@ export default function FAQ() {
                     <div className="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center mx-auto mb-4">
                       <Search size={22} className="text-orange-400" strokeWidth={2} />
                     </div>
-                    <p style={{ color: dark ? "#E2E8F0" : "#1F2937" }} className="font-sans font-semibold text-base mb-1">No results found</p>
-                    <p style={{ color: dark ? "#64748B" : "#9CA3AF" }} className="text-sm mb-5">Nothing matched "<span className="text-orange-500">{search}</span>". Try different keywords.</p>
+                    <p className="font-sans font-semibold text-base mb-1" style={{ color: dark ? "#E2E8F0" : "#1F2937" }}>No results found</p>
+                    <p className="text-sm mb-5" style={{ color: dark ? "#64748B" : "#9CA3AF" }}>
+                      Nothing matched "<span className="text-orange-500">{search}</span>". Try different keywords.
+                    </p>
                     <Link to="/contact-us"
                       className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-sans font-semibold text-sm"
                       style={{ background: "linear-gradient(135deg,#FF7A00,#E91E63)", boxShadow: "0 4px 16px rgba(255,122,0,0.3)" }}>
@@ -266,10 +309,15 @@ export default function FAQ() {
                     transition={{ delay: ci * 0.07 }}>
                     <div className="category-section-label">
                       <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-200" />
-                      <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#F3F4F6"}` }} className="flex items-center gap-2 px-3 py-1 rounded-full"
-                        style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+                      <div
+                        className="flex items-center gap-2 px-3 py-1 rounded-full"
+                        style={{
+                          background: dark ? "#1E293B" : "#fff",
+                          border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#F3F4F6"}`,
+                          boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+                        }}>
                         <span style={{ fontSize: 11, color: "#FF7A00" }}>{c.emoji}</span>
-                        <span style={{ color: dark ? "#64748B" : "#9CA3AF" }} className="font-sans font-bold text-xs uppercase tracking-widest">{c.label}</span>
+                        <span className="font-sans font-bold text-xs uppercase tracking-widest" style={{ color: dark ? "#64748B" : "#9CA3AF" }}>{c.label}</span>
                       </div>
                       <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-200" />
                     </div>
@@ -286,8 +334,6 @@ export default function FAQ() {
               </motion.div>
             )}
           </AnimatePresence>
-
-        
 
         </div>
       </section>

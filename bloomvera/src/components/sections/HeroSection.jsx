@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, MapPin } from "lucide-react";
 
 export default function HeroSection() {
   const [videoErr, setVideoErr] = useState(false);
@@ -41,7 +41,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/25 bg-white/10 backdrop-blur-md mb-7"
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/25 bg-white/10 backdrop-blur-md mb-4"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse shrink-0" />
           <span className="text-white/90 text-xs font-sans font-semibold tracking-[0.14em] uppercase">
@@ -49,11 +49,13 @@ export default function HeroSection() {
           </span>
         </motion.div>
 
+         
+
         {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.32, ease: [0.22,1,0.36,1] }}
+          transition={{ duration: 0.7, delay: 0.36, ease: [0.22,1,0.36,1] }}
           className="font-sans font-bold text-white leading-[1.08] tracking-tight max-w-4xl mb-6"
           style={{ fontSize: "clamp(2.6rem,7vw,5.2rem)", letterSpacing: "-0.025em" }}
         >
@@ -72,17 +74,20 @@ export default function HeroSection() {
         <motion.p
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.46 }}
+          transition={{ duration: 0.6, delay: 0.48 }}
           className="text-white/75 text-base sm:text-lg leading-relaxed max-w-lg mb-10"
         >
-          Personalized, evidence-based therapy empowering autistic children to develop skills, build confidence, and reach their full potential.
+          Personalized, evidence-based therapy empowering autistic children to develop skills, build confidence, and reach their full potential —{" "}
+          <span style={{ color: "rgba(255,255,255,0.9)", fontWeight: 600 }}>
+            in the comfort of your home across Washington.
+          </span>
         </motion.p>
 
         {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.58 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center gap-3"
         >
           <Link to="/contact-us"
@@ -97,9 +102,10 @@ export default function HeroSection() {
             Our Services
           </Link>
         </motion.div>
-      </div>
 
-     
+      
+
+      </div>
     </section>
   );
 }

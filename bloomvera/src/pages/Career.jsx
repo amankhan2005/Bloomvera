@@ -23,18 +23,6 @@ const openings = [
     desc: "Implement one-on-one ABA therapy sessions under BCBA supervision in home and centre settings.",
     tags: ["Entry-Level", "Hands-On"],
   },
-  {
-    title: "Social Skills Coach",
-    type: "Part-Time", location: "Steilacoom, WA / Remote",
-    desc: "Facilitate engaging social skills groups for children and teens with autism spectrum disorder.",
-    tags: ["Groups", "Flexible"],
-  },
-  {
-    title: "Home Support Specialist",
-    type: "Full-Time", location: "Steilacoom, WA",
-    desc: "Provide home-based autism support, helping children develop daily living and independence skills.",
-    tags: ["Home-Based", "Community"],
-  },
 ];
 
 const perks = [

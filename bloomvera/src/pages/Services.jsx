@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Brain, Users, Sparkles, Home, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Brain, Users, Sparkles, Home, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import PageHero from "../components/ui/PageHero";
 import CTASection from "../components/sections/CTASection";
@@ -58,8 +58,8 @@ const services = [
     image: "/home-support.jpg", color: "#7C3AED",
     gradient: "linear-gradient(135deg,#7C3AED 0%,#FF7A00 100%)",
     gradientSoft: "linear-gradient(135deg,rgba(124,58,237,0.08) 0%,rgba(255,122,0,0.08) 100%)",
-    desc: "Our therapists come to your home, addressing challenges as they naturally occur — while actively coaching your family to reinforce learning throughout every day.",
-    benefits: ["Therapy in familiar surroundings", "Real-life skill generalization", "Active family coaching", "Flexible scheduling", "Immediate skill application"],
+    desc: "Our therapists come directly to your home across Washington State, addressing challenges as they naturally occur — while actively coaching your family to reinforce learning throughout every day.",
+    benefits: ["Serving families across Washington State", "Therapy in familiar surroundings", "Real-life skill generalization", "Active family coaching", "Flexible scheduling", "Immediate skill application"],
     process: [
       { step: "Home Visit", desc: "Initial assessment of environment and goals." },
       { step: "Scheduling", desc: "Flexible sessions fitting your family life." },
@@ -75,7 +75,6 @@ export default function Services() {
   const scrollRef = useRef(null);
   const s = services.find(x => x.id === active);
   const Icon = s.icon;
-  const activeIdx = services.findIndex(x => x.id === active);
 
   const scrollTabs = (dir) => {
     if (scrollRef.current) {
@@ -85,7 +84,6 @@ export default function Services() {
 
   const handleTabClick = (id) => {
     setActive(id);
-    // Auto-scroll selected tab into view
     const el = scrollRef.current?.querySelector(`[data-id="${id}"]`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   };
@@ -98,10 +96,8 @@ export default function Services() {
 
         .process-card {
           position: relative;
-          background: #fff;
           border-radius: 20px;
           padding: 1.5rem 1.25rem 1.25rem;
-          border: 1px solid rgba(0,0,0,0.06);
           overflow: hidden;
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
@@ -118,7 +114,6 @@ export default function Services() {
           border-radius: 12px;
           transition: background 0.2s;
         }
-        .benefit-item:hover { background: rgba(255,255,255,0.7); }
 
         @media (max-width: 640px) {
           .content-grid { grid-template-columns: 1fr !important; }
@@ -135,15 +130,21 @@ export default function Services() {
       />
 
       {/* ── STICKY TAB BAR ── */}
-      <div style={{ background: dark ? "rgba(17,24,39,0.95)" : "rgba(255,255,255,0.92)", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#F3F4F6"}` }} className="sticky top-0 z-30 backdrop-blur-xl"
-        style={{ boxShadow: "0 2px 20px rgba(0,0,0,0.06)" }}>
+      <div
+        className="sticky top-0 z-30 backdrop-blur-xl"
+        style={{
+          background: dark ? "rgba(17,24,39,0.95)" : "rgba(255,255,255,0.92)",
+          borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "#F3F4F6"}`,
+          boxShadow: "0 2px 20px rgba(0,0,0,0.06)",
+        }}>
         <div className="max-w-6xl mx-auto">
 
-          {/* Mobile: scroll arrows + pill strip */}
+          {/* Mobile */}
           <div className="flex sm:hidden items-center gap-1 px-3 py-3">
             <button
               onClick={() => scrollTabs(-1)}
-              style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
+              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
+              style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }}
               aria-label="Scroll left">
               <ChevronLeft size={15} strokeWidth={2.5} />
             </button>
@@ -161,7 +162,7 @@ export default function Services() {
                     className="shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full font-sans font-semibold text-xs transition-all duration-300"
                     style={isA
                       ? { background: sv.gradient, color: "#fff", boxShadow: `0 4px 14px ${sv.color}45` }
-                      : { background: "#F3F4F6", color: "#9CA3AF" }
+                      : { background: dark ? "#1E293B" : "#F3F4F6", color: dark ? "#64748B" : "#9CA3AF" }
                     }>
                     <SI size={13} strokeWidth={2.2} />
                     {sv.title}
@@ -172,13 +173,14 @@ export default function Services() {
 
             <button
               onClick={() => scrollTabs(1)}
-              style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }} className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
+              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center active:scale-95 transition-transform"
+              style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "#E5E7EB"}`, color: dark ? "#94A3B8" : "#6B7280" }}
               aria-label="Scroll right">
               <ChevronRight size={15} strokeWidth={2.5} />
             </button>
           </div>
 
-          {/* Desktop: centered wrap */}
+          {/* Desktop */}
           <div className="hidden sm:flex flex-wrap gap-2 justify-center px-8 py-4">
             {services.map((sv) => {
               const SI = sv.icon;
@@ -191,7 +193,7 @@ export default function Services() {
                   className="flex items-center gap-2 px-5 py-2.5 rounded-full font-sans font-semibold text-sm transition-all duration-300"
                   style={isA
                     ? { background: sv.gradient, color: "#fff", boxShadow: `0 4px 18px ${sv.color}40` }
-                    : { background: "#F3F4F6", color: "#6B7280" }
+                    : { background: dark ? "#1E293B" : "#F3F4F6", color: dark ? "#64748B" : "#6B7280" }
                   }>
                   <SI size={15} strokeWidth={2} />
                   {sv.title}
@@ -205,6 +207,26 @@ export default function Services() {
       {/* ── MAIN CONTENT ── */}
       <section style={{ background: dark ? "#111827" : "#F9FAFB", paddingTop: "3rem", paddingBottom: "4rem" }}>
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
+
+          {/* ── STATIC Washington Home-Based Banner (outside AnimatePresence) ── */}
+          <div
+            className="flex items-center gap-3 rounded-2xl px-5 py-3.5 mb-6"
+            style={{
+              background: dark ? "rgba(124,58,237,0.10)" : "rgba(124,58,237,0.07)",
+              border: `1px solid ${dark ? "rgba(124,58,237,0.25)" : "rgba(124,58,237,0.18)"}`,
+            }}>
+            <div
+              className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
+              style={{ background: "rgba(124,58,237,0.15)" }}>
+              <MapPin size={16} style={{ color: "#7C3AED" }} strokeWidth={2} />
+            </div>
+            <p className="text-sm" style={{ color: dark ? "#CBD5E1" : "#374151" }}>
+              <span className="font-semibold" style={{ color: dark ? "#F1F5F9" : "#111827" }}>
+                Available as Home-Based ABA in Washington State —&nbsp;
+              </span>
+              all our services can be delivered directly at your home by our certified therapists.
+            </p>
+          </div>
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -236,18 +258,23 @@ export default function Services() {
 
                 {/* Left: image + desc + CTA */}
                 <div className="flex flex-col gap-5">
-                  <div className="rounded-2xl overflow-hidden bg-gray-200 relative group"
-                    style={{ aspectRatio: "16/9" }}>
+                  <div className="rounded-2xl overflow-hidden relative group"
+                    style={{ aspectRatio: "16/9", background: `${s.color}15` }}>
                     <img src={s.image} alt={s.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      onError={e => { e.target.parentElement.style.background = `${s.color}15`; e.target.style.display = "none"; }} />
+                      onError={e => { e.target.style.display = "none"; }} />
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: `linear-gradient(to top, ${s.color}40, transparent)` }} />
                   </div>
 
-                  <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`, borderRadius: 16, padding: "24px" }}
-                    style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.05)" }}>
-                    <p style={{ color: dark ? "#94A3B8" : "#4B5563" }} className="text-sm leading-relaxed mb-5">{s.desc}</p>
+                  <div
+                    className="rounded-2xl p-6"
+                    style={{
+                      background: dark ? "#1E293B" : "#fff",
+                      border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`,
+                      boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
+                    }}>
+                    <p className="text-sm leading-relaxed mb-5" style={{ color: dark ? "#94A3B8" : "#4B5563" }}>{s.desc}</p>
                     <Link to="/contact-us"
                       className="inline-flex items-center gap-2 px-6 py-3 text-white font-sans font-bold text-sm rounded-xl hover:-translate-y-0.5 transition-all active:scale-95"
                       style={{ background: s.gradient, boxShadow: `0 6px 20px ${s.color}35` }}>
@@ -258,11 +285,16 @@ export default function Services() {
                 </div>
 
                 {/* Right: benefits */}
-                <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`, borderRadius: 16, padding: "24px" }}
-                  style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.05)" }}>
+                <div
+                  className="rounded-2xl p-6"
+                  style={{
+                    background: dark ? "#1E293B" : "#fff",
+                    border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`,
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
+                  }}>
                   <div className="flex items-center gap-2 mb-5">
                     <div className="w-1 h-5 rounded-full" style={{ background: s.gradient }} />
-                    <h3 style={{ color: dark ? "#F1F5F9" : "#111827" }} className="font-bold text-base tracking-tight">Key Benefits</h3>
+                    <h3 className="font-bold text-base tracking-tight" style={{ color: dark ? "#F1F5F9" : "#111827" }}>Key Benefits</h3>
                   </div>
                   <ul className="space-y-1">
                     {s.benefits.map((b, i) => (
@@ -276,7 +308,7 @@ export default function Services() {
                           style={{ background: `${s.color}15` }}>
                           <CheckCircle2 size={13} style={{ color: s.color }} strokeWidth={2.5} />
                         </div>
-                        <span style={{ color: dark ? "#CBD5E1" : "#374151" }} className="text-sm">{b}</span>
+                        <span className="text-sm" style={{ color: dark ? "#CBD5E1" : "#374151" }}>{b}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -284,11 +316,16 @@ export default function Services() {
               </div>
 
               {/* ── PROCESS ── */}
-              <div style={{ background: dark ? "#1E293B" : "#fff", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`, borderRadius: 16, padding: "24px 32px" }}
-                style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.05)" }}>
+              <div
+                className="rounded-2xl px-8 py-6"
+                style={{
+                  background: dark ? "#1E293B" : "#fff",
+                  border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)"}`,
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
+                }}>
                 <div className="flex items-center gap-2 mb-6">
                   <div className="w-1 h-5 rounded-full" style={{ background: s.gradient }} />
-                  <h3 style={{ color: dark ? "#F1F5F9" : "#111827" }} className="font-bold text-base tracking-tight">Our Process</h3>
+                  <h3 className="font-bold text-base tracking-tight" style={{ color: dark ? "#F1F5F9" : "#111827" }}>Our Process</h3>
                 </div>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 process-grid">
                   {s.process.map((p, i) => (
@@ -297,27 +334,27 @@ export default function Services() {
                       initial={{ opacity: 0, y: 14 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.08, duration: 0.35 }}
-                      className="process-card">
-                      {/* Step number watermark */}
+                      className="process-card"
+                      style={{
+                        background: dark ? "#0F172A" : "#fff",
+                        border: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+                      }}>
                       <span className="absolute top-3 right-4 font-black text-6xl leading-none select-none"
                         style={{ color: s.color, opacity: 0.06 }}>{i + 1}</span>
 
-                      {/* Accent bar */}
                       <div className="w-8 h-1 rounded-full mb-4" style={{ background: s.gradient }} />
 
-                      {/* Step badge */}
                       <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold mb-2"
                         style={{ background: `${s.color}12`, color: s.color }}>
                         Step {i + 1}
                       </span>
 
-                      <h4 className="font-bold text-gray-900 text-sm mb-1.5 leading-tight">{p.step}</h4>
-                      <p className="text-gray-500 text-xs leading-relaxed">{p.desc}</p>
+                      <h4 className="font-bold text-sm mb-1.5 leading-tight" style={{ color: dark ? "#F1F5F9" : "#111827" }}>{p.step}</h4>
+                      <p className="text-xs leading-relaxed" style={{ color: dark ? "#64748B" : "#6B7280" }}>{p.desc}</p>
 
-                      {/* Connector dot (not on last) */}
                       {i < s.process.length - 1 && (
-                        <div className="hidden lg:block absolute top-1/2 -right-2 w-4 h-4 rounded-full border-2 border-white z-10"
-                          style={{ background: s.color, transform: "translateY(-50%)" }} />
+                        <div className="hidden lg:block absolute top-1/2 -right-2 w-4 h-4 rounded-full border-2 z-10"
+                          style={{ background: s.color, borderColor: dark ? "#1E293B" : "#fff", transform: "translateY(-50%)" }} />
                       )}
                     </motion.div>
                   ))}

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Heart, Award, Users, BookOpen } from "lucide-react";
+import { Heart, Award, Users, BookOpen, MapPin } from "lucide-react";
 import PageHero from "../components/ui/PageHero";
 import SectionHeading from "../components/ui/SectionHeading";
 import { useTheme } from "../context/ThemeContext";
@@ -79,10 +79,37 @@ export default function About() {
               <p className="text-base leading-relaxed mb-4" style={{ color: body }}>
                 We integrate evidence-based techniques with a genuine commitment to the wellbeing of each child and family. Our therapists aren't just clinicians — they are dedicated partners in your journey.
               </p>
-              <p className="text-base leading-relaxed" style={{ color: body }}>
+              <p className="text-base leading-relaxed mb-6" style={{ color: body }}>
                 Every program is tailored to the individual. No two children are the same, and neither are their care plans.
               </p>
+
+              {/* ── Home-Based ABA callout ── */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2, ease: [0.22,1,0.36,1] }}
+                className="flex items-start gap-4 rounded-2xl px-5 py-4"
+                style={{
+                  background: dark ? "rgba(0,166,81,0.10)" : "rgba(0,166,81,0.07)",
+                  border: `1px solid ${dark ? "rgba(0,166,81,0.25)" : "rgba(0,166,81,0.18)"}`,
+                }}
+              >
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+                  style={{ background: "rgba(0,166,81,0.15)" }}>
+                  <MapPin size={18} style={{ color: "#00A651" }} strokeWidth={2} />
+                </div>
+                <div>
+                  <p className="font-sans font-semibold text-sm mb-1" style={{ color: heading }}>
+                    Home-Based ABA Therapy · Washington State
+                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: body }}>
+                    We bring therapy to where children feel most comfortable — their own home. Our certified behavior analysts provide in-home ABA services across Washington, helping families build real-world skills in a familiar, low-stress environment.
+                  </p>
+                </div>
+              </motion.div>
             </motion.div>
+
             <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1, ease: [0.22,1,0.36,1] }}
               className="order-1 lg:order-2">
