@@ -58,7 +58,7 @@ export default function Footer() {
             <p className="text-sm leading-relaxed mb-6" style={{ color: textMuted }}>
               Empowering autistic children with compassionate, evidence-based care.
             </p>
-            <div className="flex gap-2">
+            {/* <div className="flex gap-2">
               {socials.map(({ icon: Icon, href, label }) => (
                 <a key={label} href={href} aria-label={label}
                   className="w-9 h-9 rounded-xl flex items-center justify-center transition-all hover:text-white"
@@ -71,7 +71,7 @@ export default function Footer() {
                   <Icon size={15} />
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Quick links */}
@@ -107,12 +107,18 @@ export default function Footer() {
             <h4 className="font-sans font-semibold text-sm mb-5" style={{ color: headingColor }}>Contact</h4>
             <ul className="space-y-4">
               <li>
-                <a href="https://maps.google.com/?q=2823+Marietta+St,+Steilacoom,+WA+98388"
-                  target="_blank" rel="noopener noreferrer"
+                <a
+                  href="https://maps.google.com/?q=Lakewood,+WA"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-start gap-3 text-sm transition-colors hover:text-orange-400"
-                  style={{ color: textMuted }}>
-                  <MapPin size={14} className="text-orange-400 mt-0.5 shrink-0" />
-                  <span>2823 Marietta St<br />Steilacoom, WA 98388</span>
+                  style={{ color: textMuted }}
+                >
+                  <MapPin
+                    size={14}
+                    className="text-orange-400 mt-0.5 shrink-0"
+                  />
+                  <span>Lakewood, WA</span>
                 </a>
               </li>
               <li>

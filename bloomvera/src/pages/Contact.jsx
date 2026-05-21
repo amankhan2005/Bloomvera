@@ -11,23 +11,29 @@ import { useTheme } from "../context/ThemeContext";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const contactInfo = [
-  { icon: Phone,  label: "Phone",   value: "+1 774-464-2639",                      href: "tel:+17744642639",                                                   color: "#FF7A00", newTab: false },
-  { icon: Mail,   label: "Email",   value: "info@bloomveraautism.com",             href: "mailto:info@bloomveraautism.com",                                    color: "#00A651", newTab: false },
-  { icon: MapPin, label: "Address", value: "2823 Marietta St\nSteilacoom, WA 98388", href: "https://maps.google.com/?q=2823+Marietta+St,+Steilacoom,+WA+98388", color: "#E91E63", newTab: true },
-];
+  { icon: Phone, label: "Phone", value: "+1 774-464-2639", href: "tel:+17744642639", color: "#FF7A00", newTab: false },
+  { icon: Mail, label: "Email", value: "info@bloomveraautism.com", href: "mailto:info@bloomveraautism.com", color: "#00A651", newTab: false },
+  {
+    icon: MapPin,
+    label: "Address",
+    value: "Lakewood, WA",
+    href: "https://maps.google.com/?q=Lakewood,+WA",
+    color: "#E91E63",
+    newTab: true
+  },];
 
 const hours = [
   ["Monday – Friday", "9:00 AM – 6:00 PM", false],
-  ["Saturday",        "10:00 AM – 2:00 PM", false],
-  ["Sunday",          "Closed",              true],
+  ["Saturday", "10:00 AM – 2:00 PM", false],
+  ["Sunday", "Closed", true],
 ];
 
 const initialForm = { name: "", email: "", phone: "", message: "" };
 
 function validate(form) {
   const e = {};
-  if (!form.name.trim())    e.name    = "Name is required";
-  if (!form.email.trim())   e.email   = "Email is required";
+  if (!form.name.trim()) e.name = "Name is required";
+  if (!form.email.trim()) e.email = "Email is required";
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email";
   if (form.phone && !/^\+?[\d\s\-()]{7,20}$/.test(form.phone)) e.phone = "Enter a valid phone number";
   if (!form.message.trim()) e.message = "Message is required";
@@ -37,19 +43,19 @@ function validate(form) {
 
 export default function Contact() {
   const { dark } = useTheme();
-  const [form, setForm]       = useState(initialForm);
-  const [errors, setErrors]   = useState({});
+  const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [done, setDone]       = useState(false);
+  const [done, setDone] = useState(false);
   const [focused, setFocused] = useState("");
 
   // Design tokens
-  const bg       = dark ? "#111827" : "#F9FAFB";
-  const cardBg   = dark ? "#1E293B" : "#ffffff";
+  const bg = dark ? "#111827" : "#F9FAFB";
+  const cardBg = dark ? "#1E293B" : "#ffffff";
   const cardBorder = dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.06)";
-  const heading  = dark ? "#F1F5F9" : "#111827";
-  const body     = dark ? "#94A3B8" : "#6B7280";
-  const inputBg  = dark ? "#0F172A" : "#ffffff";
+  const heading = dark ? "#F1F5F9" : "#111827";
+  const body = dark ? "#94A3B8" : "#6B7280";
+  const inputBg = dark ? "#0F172A" : "#ffffff";
   const inputBorder = (field) => {
     if (errors[field]) return "#F87171";
     if (focused === field) return "#FF7A00";
@@ -60,10 +66,10 @@ export default function Contact() {
     if (focused === field) return "0 0 0 3px rgba(255,122,0,0.12)";
     return "none";
   };
-  const inputText  = dark ? "#E2E8F0" : "#111827";
-  const divider    = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
-  const trustText  = dark ? "#64748B" : "#9CA3AF";
-  const trustDiv   = dark ? "#334155" : "#E5E7EB";
+  const inputText = dark ? "#E2E8F0" : "#111827";
+  const divider = dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)";
+  const trustText = dark ? "#64748B" : "#9CA3AF";
+  const trustDiv = dark ? "#334155" : "#E5E7EB";
 
   const onChange = e => {
     const { name, value } = e.target;
@@ -78,7 +84,7 @@ export default function Contact() {
     if (!API_URL) { toast.error("API URL not configured."); return; }
     setLoading(true);
     try {
-      const res  = await fetch(`${API_URL}/api/inquiry`, {
+      const res = await fetch(`${API_URL}/api/inquiry`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

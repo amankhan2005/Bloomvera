@@ -13,13 +13,15 @@ const API_URL = process.env.REACT_APP_API_URL;
 const openings = [
   {
     title: "BCBA – Board Certified Behavior Analyst",
-    type: "Full-Time", location: "Steilacoom, WA",
+    type: "Full-Time",
+    location: "Lakewood, WA",
     desc: "Lead clinical programs, supervise RBTs, and deliver ABA therapy plans for children with autism.",
     tags: ["Clinical", "Leadership"],
   },
   {
     title: "Registered Behaviour Technician (RBT)",
-    type: "Full-Time / Part-Time", location: "Steilacoom, WA",
+    type: "Full-Time / Part-Time",
+    location: "Lakewood, WA",
     desc: "Implement one-on-one ABA therapy sessions under BCBA supervision in home and centre settings.",
     tags: ["Entry-Level", "Hands-On"],
   },

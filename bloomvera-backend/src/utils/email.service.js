@@ -6,12 +6,12 @@ function getResend() {
 }
 
 function getFrom() {
-  const name  = process.env.FROM_NAME  || "Bloomvera Autism";
+  const name = process.env.FROM_NAME || "Bloomvera Autism";
   const email = process.env.FROM_EMAIL || "noreply@bloomveraautism.com";
   return `${name} <${email}>`;
 }
 
-function getYear()  { return new Date().getFullYear(); }
+function getYear() { return new Date().getFullYear(); }
 function getTimestamp() {
   return new Date().toLocaleString("en-US", { dateStyle: "full", timeStyle: "short" });
 }
@@ -19,7 +19,7 @@ function getTimestamp() {
 // ─────────────────────────────────────────────────────────────────
 // SHARED STYLE CONSTANTS (inline for email clients)
 // ─────────────────────────────────────────────────────────────────
-const GRAD   = "background:linear-gradient(135deg,#FF7A00 0%,#E91E63 100%)";
+const GRAD = "background:linear-gradient(135deg,#FF7A00 0%,#E91E63 100%)";
 const FOOTER = `background:#F9FAFB;padding:20px 32px;border-top:1px solid #E5E7EB;`;
 
 // ─────────────────────────────────────────────────────────────────
@@ -27,7 +27,7 @@ const FOOTER = `background:#F9FAFB;padding:20px 32px;border-top:1px solid #E5E7E
 // ─────────────────────────────────────────────────────────────────
 async function sendAdminEmail({ name, email, phone, message }) {
   const resend = getResend();
-  const ADMIN  = process.env.ADMIN_EMAIL;
+  const ADMIN = process.env.ADMIN_EMAIL;
   if (!ADMIN) throw new Error("ADMIN_EMAIL is not set");
 
   const html = `<!DOCTYPE html>
@@ -114,7 +114,7 @@ async function sendAdminEmail({ name, email, phone, message }) {
 // 2. CONTACT — USER CONFIRMATION
 // ─────────────────────────────────────────────────────────────────
 async function sendUserConfirmationEmail({ name, email }) {
-  const resend  = getResend();
+  const resend = getResend();
   const siteUrl = process.env.FRONTEND_URL || "https://bloomveraautism.com";
 
   const html = `<!DOCTYPE html>
@@ -144,10 +144,10 @@ async function sendUserConfirmationEmail({ name, email }) {
     <div style="background:#FFF5EB;border-radius:12px;padding:20px 24px;margin-bottom:28px;">
       <p style="margin:0 0 16px;font-size:12px;font-weight:700;color:#CC6200;text-transform:uppercase;letter-spacing:0.08em;">What Happens Next</p>
       ${[
-        ["#FF7A00","1","Our team reviews your message","Usually within a few hours"],
-        ["#FF7A00","2","We reach out personally","By phone or email — your preference"],
-        ["#00A651","3","Free consultation","No obligation, just a conversation"],
-      ].map(([color, num, title, sub]) => `
+      ["#FF7A00", "1", "Our team reviews your message", "Usually within a few hours"],
+      ["#FF7A00", "2", "We reach out personally", "By phone or email — your preference"],
+      ["#00A651", "3", "Free consultation", "No obligation, just a conversation"],
+    ].map(([color, num, title, sub]) => `
       <table cellpadding="0" cellspacing="0" style="margin-bottom:14px;"><tr>
         <td style="vertical-align:top;padding-right:12px;">
           <div style="width:24px;height:24px;background:${color};border-radius:50%;text-align:center;line-height:24px;">
@@ -178,12 +178,12 @@ async function sendUserConfirmationEmail({ name, email }) {
 
   <!-- FOOTER -->
   <tr><td style="${FOOTER}">
-    <p style="margin:0;font-size:11px;color:#9CA3AF;text-align:center;line-height:1.7;">
-      <strong style="color:#374151;">Bloomvera Autism</strong><br/>
-      info@bloomveraautism.com &nbsp;·&nbsp; +1 774-464-2639<br/>
-      2823 Marietta St, Steilacoom, WA 98388<br/><br/>
-      © ${getYear()} Bloomvera Autism. All rights reserved.
-    </p>
+   <p style="margin:0;font-size:11px;color:#9CA3AF;text-align:center;line-height:1.7;">
+  <strong style="color:#374151;">Bloomvera Autism</strong><br/>
+  info@bloomveraautism.com &nbsp;·&nbsp; +1 774-464-2639<br/>
+  Lakewood, WA<br/><br/>
+  © ${getYear()} Bloomvera Autism. All rights reserved.
+</p>
   </td></tr>
 
 </table>
@@ -204,14 +204,14 @@ async function sendUserConfirmationEmail({ name, email }) {
 // ─────────────────────────────────────────────────────────────────
 async function sendCareerAdminEmail({ fullName, email, phone, position, message, resumeFile }) {
   const resend = getResend();
-  const ADMIN  = process.env.ADMIN_EMAIL;
+  const ADMIN = process.env.ADMIN_EMAIL;
   if (!ADMIN) throw new Error("ADMIN_EMAIL is not set");
 
   const attachments = [];
   if (resumeFile) {
     attachments.push({
       filename: resumeFile.originalname,
-      content:  resumeFile.buffer,           // Buffer from multer memoryStorage
+      content: resumeFile.buffer,           // Buffer from multer memoryStorage
     });
   }
 
@@ -259,8 +259,8 @@ async function sendCareerAdminEmail({ fullName, email, phone, position, message,
         <p style="margin:0;font-size:11px;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.08em;">📎 Resume</p>
         <p style="margin:4px 0 0;font-size:14px;color:#111827;">
           ${resumeFile
-            ? `<span style="color:#00A651;font-weight:600;">✅ Attached — ${resumeFile.originalname}</span>`
-            : '<span style="color:#9CA3AF;">Not provided</span>'}
+      ? `<span style="color:#00A651;font-weight:600;">✅ Attached — ${resumeFile.originalname}</span>`
+      : '<span style="color:#9CA3AF;">Not provided</span>'}
         </p>
       </td></tr>
       <tr><td style="padding:10px 0;">
@@ -312,7 +312,7 @@ async function sendCareerAdminEmail({ fullName, email, phone, position, message,
 // 4. CAREER — APPLICANT CONFIRMATION
 // ─────────────────────────────────────────────────────────────────
 async function sendCareerConfirmationEmail({ fullName, email, position }) {
-  const resend  = getResend();
+  const resend = getResend();
   const siteUrl = process.env.FRONTEND_URL || "https://bloomveraautism.com";
 
   const html = `<!DOCTYPE html>
@@ -349,11 +349,11 @@ async function sendCareerConfirmationEmail({ fullName, email, position }) {
     <div style="background:#F0FDF4;border-radius:12px;padding:20px 24px;margin-bottom:28px;">
       <p style="margin:0 0 16px;font-size:12px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:0.08em;">What Happens Next</p>
       ${[
-        ["#FF7A00","1","Application Review","Our hiring team reviews your application & resume"],
-        ["#FF7A00","2","Initial Screening","We'll reach out for a brief phone conversation"],
-        ["#00A651","3","Interview","Meet our clinical team and learn about the role"],
-        ["#00A651","4","Offer","We extend an offer to the best-fit candidate"],
-      ].map(([color, num, title, sub]) => `
+      ["#FF7A00", "1", "Application Review", "Our hiring team reviews your application & resume"],
+      ["#FF7A00", "2", "Initial Screening", "We'll reach out for a brief phone conversation"],
+      ["#00A651", "3", "Interview", "Meet our clinical team and learn about the role"],
+      ["#00A651", "4", "Offer", "We extend an offer to the best-fit candidate"],
+    ].map(([color, num, title, sub]) => `
       <table cellpadding="0" cellspacing="0" style="margin-bottom:14px;width:100%;"><tr>
         <td style="vertical-align:top;padding-right:12px;width:32px;">
           <div style="width:24px;height:24px;background:${color};border-radius:50%;text-align:center;line-height:24px;">
@@ -390,12 +390,12 @@ async function sendCareerConfirmationEmail({ fullName, email, position }) {
 
   <!-- FOOTER -->
   <tr><td style="${FOOTER}">
-    <p style="margin:0;font-size:11px;color:#9CA3AF;text-align:center;line-height:1.7;">
-      <strong style="color:#374151;">Bloomvera Autism</strong><br/>
-      info@bloomveraautism.com &nbsp;·&nbsp; +1 774-464-2639<br/>
-      2823 Marietta St, Steilacoom, WA 98388<br/><br/>
-      © ${getYear()} Bloomvera Autism. All rights reserved.
-    </p>
+   <p style="margin:0;font-size:11px;color:#9CA3AF;text-align:center;line-height:1.7;">
+  <strong style="color:#374151;">Bloomvera Autism</strong><br/>
+  info@bloomveraautism.com &nbsp;·&nbsp; +1 774-464-2639<br/>
+  Lakewood, WA<br/><br/>
+  © ${getYear()} Bloomvera Autism. All rights reserved.
+</p>
   </td></tr>
 
 </table>
