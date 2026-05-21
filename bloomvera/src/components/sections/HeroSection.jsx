@@ -99,46 +99,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* ── BOTTOM STATS BAR ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, delay: 0.75 }}
-        className="absolute bottom-0 left-0 right-0 z-10"
-      >
-        <div className="max-w-4xl mx-auto px-5 pb-8">
-          <div className="grid grid-cols-3 gap-2">
-            {[
-              ["50+","Families Served"],
-              ["4","Core Programs"],
-              ["100%","Child-Centered"],
-            ].map(([val, lab]) => (
-              <div key={lab}
-                className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl py-4 px-3 text-center">
-                <p className="font-sans font-bold text-white leading-none mb-1"
-                  style={{ fontSize: "clamp(1.4rem,3vw,2rem)" }}>{val}</p>
-                <p className="text-white/60 text-[11px] sm:text-xs font-sans leading-tight">{lab}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-36 left-1/2 -translate-x-1/2 z-10 hidden sm:block"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 rounded-full border-2 border-white/30 flex items-start justify-center pt-1.5"
-        >
-          <div className="w-1 h-1.5 rounded-full bg-white/60" />
-        </motion.div>
-      </motion.div>
+     
     </section>
   );
 }
