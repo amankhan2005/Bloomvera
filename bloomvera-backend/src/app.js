@@ -15,13 +15,13 @@ app.use(helmet());
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://bloomveraautism.com",
+  "https://bloomveraautism.com",
   "https://www.bloomveraautism.com",
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (mobile apps, curl, Postman) in dev only
       if (!origin) {
         if (process.env.NODE_ENV !== "production") return callback(null, true);
         return callback(new Error("CORS: Missing origin in production"));
@@ -43,6 +43,16 @@ app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
+
+// ── Root route
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "🌸 Bloomvera Autism API is running",
+    version: "1.0.0",
+    environment: process.env.NODE_ENV || "development",
+  });
+});
 
 // ── Health check
 app.get("/health", (req, res) => {
