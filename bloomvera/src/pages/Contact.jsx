@@ -20,7 +20,8 @@ const contactInfo = [
     href: "https://maps.google.com/?q=Lakewood,+WA",
     color: "#E91E63",
     newTab: true
-  },];
+  },
+];
 
 const hours = [
   ["Monday – Friday", "9:00 AM – 6:00 PM", false],
@@ -39,6 +40,34 @@ function validate(form) {
   if (!form.message.trim()) e.message = "Message is required";
   else if (form.message.trim().length < 10) e.message = "At least 10 characters required";
   return e;
+}
+
+// ─── Moved OUTSIDE Contact so React never recreates the component type on re-render ───
+function FieldLabel({ label, required, hint, error, dark, children }) {
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+        <label style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: dark ? "#64748B" : "#6B7280" }}>
+          {label}{required && <span style={{ color: "#F472B6", marginLeft: 2 }}>*</span>}
+        </label>
+        {hint && <span style={{ fontSize: 11, color: dark ? "#64748B" : "#9CA3AF" }}>{hint}</span>}
+      </div>
+      {children}
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -4, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: "auto" }}
+            exit={{ opacity: 0, y: -4, height: 0 }}
+            style={{ marginTop: 6, fontSize: 12, color: "#F87171", display: "flex", alignItems: "center", gap: 5 }}
+          >
+            <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#F87171", flexShrink: 0, display: "inline-block" }} />
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }
 
 export default function Contact() {
@@ -114,28 +143,6 @@ export default function Contact() {
     transition: "border-color 0.2s, box-shadow 0.2s",
     boxShadow: inputShadow(field),
   });
-
-  const FieldLabel = ({ label, required, hint, error, children }) => (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-        <label style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: dark ? "#64748B" : "#6B7280" }}>
-          {label}{required && <span style={{ color: "#F472B6", marginLeft: 2 }}>*</span>}
-        </label>
-        {hint && <span style={{ fontSize: 11, color: dark ? "#64748B" : "#9CA3AF" }}>{hint}</span>}
-      </div>
-      {children}
-      <AnimatePresence>
-        {error && (
-          <motion.p initial={{ opacity: 0, y: -4, height: 0 }} animate={{ opacity: 1, y: 0, height: "auto" }}
-            exit={{ opacity: 0, y: -4, height: 0 }}
-            style={{ marginTop: 6, fontSize: 12, color: "#F87171", display: "flex", alignItems: "center", gap: 5 }}>
-            <span style={{ width: 4, height: 4, borderRadius: "50%", background: "#F87171", flexShrink: 0, display: "inline-block" }} />
-            {error}
-          </motion.p>
-        )}
-      </AnimatePresence>
-    </div>
-  );
 
   return (
     <>
@@ -313,26 +320,26 @@ export default function Contact() {
                         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                         style={{ display: "flex", flexDirection: "column", gap: 20 }}>
 
-                        <FieldLabel label="Full Name" required error={errors.name}>
+                        <FieldLabel label="Full Name" required error={errors.name} dark={dark}>
                           <input type="text" name="name" value={form.name} onChange={onChange}
                             onFocus={() => setFocused("name")} onBlur={() => setFocused("")}
                             placeholder="Your full name" style={inputStyle("name")} />
                         </FieldLabel>
 
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-                          <FieldLabel label="Email" required error={errors.email}>
+                          <FieldLabel label="Email" required error={errors.email} dark={dark}>
                             <input type="email" name="email" value={form.email} onChange={onChange}
                               onFocus={() => setFocused("email")} onBlur={() => setFocused("")}
                               placeholder="you@example.com" style={inputStyle("email")} />
                           </FieldLabel>
-                          <FieldLabel label="Phone" hint="Optional" error={errors.phone}>
+                          <FieldLabel label="Phone" hint="Optional" error={errors.phone} dark={dark}>
                             <input type="tel" name="phone" value={form.phone} onChange={onChange}
                               onFocus={() => setFocused("phone")} onBlur={() => setFocused("")}
                               placeholder="+1 774-464-2639" style={inputStyle("phone")} />
                           </FieldLabel>
                         </div>
 
-                        <FieldLabel label="Message" required error={errors.message}>
+                        <FieldLabel label="Message" required error={errors.message} dark={dark}>
                           <textarea name="message" value={form.message} onChange={onChange} rows={5}
                             onFocus={() => setFocused("message")} onBlur={() => setFocused("")}
                             placeholder="Tell us about your child and how we can help…"
