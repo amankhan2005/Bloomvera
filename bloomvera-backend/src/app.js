@@ -15,7 +15,7 @@ app.use(helmet());
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://bloomveraautism.com",
-  "https://www.bloomveraautism.com",ß
+  "https://www.bloomveraautism.com",
 ].filter(Boolean);
 
 app.use(
